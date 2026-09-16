@@ -3,15 +3,18 @@ interface Props {
   tone?: "light" | "dark";
 }
 const { tone = "light" } = Astro.props;
-const text = tone === "light" ? "text-white" : "text-ink";
-const muted = tone === "light" ? "text-white/55" : "text-smoke";
+const text = tone === "light" ? "text-white" : "text-black";
+const muted = tone === "light" ? "text-white/60" : "text-smoke";
 ---
 
 <header class={`flex items-center justify-between px-5 py-6 sm:px-10 ${text}`}>
   <a href="/" class={`wordmark text-[1.55rem] no-underline sm:text-[1.85rem] ${text}`}>
     Drone
   </a>
-  <p class={`text-[0.75rem] font-light tracking-[0.02em] ${muted}`}>
-    with <span class={text}>Jelly Jelly</span>
-  </p>
+  <a
+    href="#book"
+    class={`text-[0.8125rem] font-light tracking-[0.02em] no-underline transition-opacity hover:opacity-70 ${muted}`}
+  >
+    Book a pickup
+  </a>
 </header>

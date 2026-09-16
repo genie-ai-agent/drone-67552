@@ -3,32 +3,32 @@
 @theme inline {
   --font-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
 
-  --color-ink: #171716;
-  --color-paper: #fafaf9;
-  --color-mist: #f5f5f3;
-  --color-smoke: #747471;
-  --color-quiet: #a3a39f;
-  --color-line: #e6e6e3;
-  --color-night: #181817;
+  --color-ink: #000000;
+  --color-paper: #fbfbfa;
+  --color-mist: #f4f4f2;
+  --color-smoke: #6e6e6b;
+  --color-quiet: #a0a09c;
+  --color-line: #e4e4e1;
+  --color-night: #000000;
 
-  --color-background: #fafaf9;
-  --color-foreground: #171716;
-  --color-border: #e6e6e3;
-  --color-input: #d4d4d0;
-  --color-ring: #171716;
-  --color-muted: #f5f5f3;
-  --color-muted-foreground: #747471;
-  --color-primary: #171716;
-  --color-primary-foreground: #fafaf9;
-  --color-secondary: #f5f5f3;
-  --color-secondary-foreground: #171716;
-  --color-accent: #f5f5f3;
-  --color-accent-foreground: #171716;
-  --color-destructive: #171716;
+  --color-background: #fbfbfa;
+  --color-foreground: #000000;
+  --color-border: #e4e4e1;
+  --color-input: #d2d2ce;
+  --color-ring: #000000;
+  --color-muted: #f4f4f2;
+  --color-muted-foreground: #6e6e6b;
+  --color-primary: #000000;
+  --color-primary-foreground: #fbfbfa;
+  --color-secondary: #f4f4f2;
+  --color-secondary-foreground: #000000;
+  --color-accent: #f4f4f2;
+  --color-accent-foreground: #000000;
+  --color-destructive: #000000;
   --color-card: #ffffff;
-  --color-card-foreground: #171716;
+  --color-card-foreground: #000000;
   --color-popover: #ffffff;
-  --color-popover-foreground: #171716;
+  --color-popover-foreground: #000000;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -97,7 +97,7 @@ body {
   background: #ffffff;
   border: 1px solid var(--color-line);
   border-radius: 22px;
-  box-shadow: 0 1px 2px rgb(23 23 22 / 0.03), 0 18px 44px -28px rgb(23 23 22 / 0.16);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.03), 0 18px 44px -28px rgb(0 0 0 / 0.18);
 }
 
 .field {
@@ -119,8 +119,8 @@ body {
 }
 
 .field:focus {
-  border-color: var(--color-ink);
-  box-shadow: 0 0 0 3px rgb(23 23 22 / 0.06);
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgb(0 0 0 / 0.07);
 }
 
 /* ---------- buttons ---------- */
@@ -239,6 +239,27 @@ body {
   border: 1px solid var(--color-ink);
   border-radius: 999px;
   animation: ring 1.7s ease-out infinite;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.kenburns {
+  animation: kenburns 14s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenburns,
+  .drift,
+  .rise {
+    animation: none;
+  }
 }
 
 @keyframes drift {

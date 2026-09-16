@@ -1,35 +1,30 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
-import HeroArt from "@/components/HeroArt.astro";
+import HeroCover from "@/components/HeroCover.astro";
 import BookingForm from "@/components/BookingForm.tsx";
 import Steps from "@/components/Steps.astro";
 ---
 
 <Layout>
   <!-- hero -->
-  <section class="relative isolate min-h-[86svh] bg-night text-white">
-    <HeroArt />
-    <div class="relative flex min-h-[86svh] flex-col">
+  <section class="relative isolate min-h-[92svh] bg-black text-white">
+    <HeroCover />
+    <div class="relative flex min-h-[92svh] flex-col">
       <div class="mx-auto w-full max-w-[1180px]">
         <Header tone="light" />
       </div>
       <div class="flex flex-1 flex-col justify-end px-5 pb-14 sm:px-10 sm:pb-20">
         <div class="mx-auto w-full max-w-[1100px]">
-          <h1 class="display rise max-w-[16ch] text-[19vw] sm:text-[11vw] lg:text-[7.5rem]">
-            Stuff gone.
+          <h1 class="display rise text-[18vw] sm:text-[10.5vw] lg:text-[7.25rem]">
+            Stuff Gone.<br /><span class="text-white/55">Life on.</span>
           </h1>
-          <p class="lede rise mt-5 max-w-[34ch] text-[1rem] text-white/65 sm:text-[1.15rem]">
+          <p class="lede rise mt-6 max-w-[34ch] text-[1rem] text-white/70 sm:text-[1.15rem]">
             Say what you want out of your life. A drone comes and takes it.
           </p>
           <a href="#book" class="pill pill-light mt-9">Book a pickup</a>
         </div>
       </div>
-      <span
-        class="pointer-events-none absolute bottom-5 right-5 text-[0.6875rem] font-light tracking-[0.06em] text-white/25 sm:bottom-6 sm:right-10"
-      >
-        [jelly photo]
-      </span>
     </div>
   </section>
 
@@ -59,8 +54,8 @@ import Steps from "@/components/Steps.astro";
   <footer class="border-t border-line bg-paper px-5 py-10 sm:px-10">
     <div class="mx-auto flex max-w-[1100px] flex-wrap items-center justify-between gap-6">
       <div>
-        <p class="wordmark text-[1.35rem] text-ink">Drone</p>
-        <p class="mt-2 text-[0.8125rem] font-light text-smoke">Powered by Jelly Jelly</p>
+        <p class="wordmark text-[1.35rem] text-black">Drone</p>
+        <p class="mt-2 text-[0.8125rem] font-light text-smoke">Stuff Gone. Life on.</p>
       </div>
       <nav class="flex flex-wrap items-center gap-x-7 gap-y-3">
         <a class="quiet-link" href="#book">Book a pickup</a>

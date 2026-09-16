@@ -99,9 +99,9 @@ export default function DispatchLog() {
 
   if (loading) {
     return (
-      <div className="space-y-3 pt-8">
+      <div className="mt-10 space-y-3">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="h-14 animate-pulse bg-[#131312]"></div>
+          <div key={i} className="h-14 animate-pulse rounded-xl bg-mist"></div>
         ))}
       </div>
     );
@@ -109,16 +109,20 @@ export default function DispatchLog() {
 
   if (!user) {
     return (
-      <div className="max-w-[420px] pt-8">
-        <p className="text-[0.9rem] leading-relaxed text-smoke">
-          Dispatch log is private. Sign in to read pickups.
+      <div className="card mt-10 max-w-[420px] p-6 sm:p-8">
+        <p className="lede text-[0.9rem] text-smoke">
+          The dispatch log is private. Sign in to read pickups.
         </p>
-        <button onClick={google} className="btn-book mt-6">
-          <span>Continue with Google</span>
-          <span className="arrow">&#8594;</span>
+        <button onClick={google} className="pill pill-block mt-6">
+          Continue with Google
         </button>
-        <form onSubmit={withEmail} className="mt-8">
-          <label className="label block" htmlFor="email">
+        <div className="my-6 flex items-center gap-4">
+          <span className="h-px flex-1 bg-line"></span>
+          <span className="text-[0.75rem] text-quiet">or email</span>
+          <span className="h-px flex-1 bg-line"></span>
+        </div>
+        <form onSubmit={withEmail}>
+          <label className="text-[0.8125rem] text-smoke" htmlFor="email">
             Email
           </label>
           <input
@@ -129,7 +133,7 @@ export default function DispatchLog() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label className="label mt-6 block" htmlFor="password">
+          <label className="mt-4 block text-[0.8125rem] text-smoke" htmlFor="password">
             Password
           </label>
           <input
@@ -141,72 +145,71 @@ export default function DispatchLog() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" disabled={busy} className="btn-book mt-8">
-            <span>{busy ? "…" : mode === "up" ? "Create account" : "Sign in"}</span>
-            <span className="arrow">&#8594;</span>
+          <button type="submit" disabled={busy} className="pill pill-outline pill-block mt-6">
+            {busy ? "…" : mode === "up" ? "Create account" : "Sign in"}
           </button>
         </form>
         <button
-          className="label mt-6 underline underline-offset-4"
+          className="quiet-link mt-5 block"
           onClick={() => setMode(mode === "up" ? "in" : "up")}
         >
           {mode === "up" ? "Have an account? Sign in" : "New here? Create an account"}
         </button>
-        {error && <p className="mt-4 border-l border-paper pl-3 text-[0.85rem]">{error}</p>}
+        {error && (
+          <p className="mt-4 rounded-xl bg-mist px-4 py-3 text-[0.85rem]">{error}</p>
+        )}
       </div>
     );
   }
 
   return (
-    <div className="pt-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="label">Signed in / {user.email ?? user.id}</p>
-        <button onClick={out} className="label underline underline-offset-4">
+    <div className="mt-10">
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-full border border-line bg-white px-5 py-3">
+        <p className="text-[0.8125rem] text-smoke">{user.email ?? user.id}</p>
+        <button onClick={out} className="quiet-link">
           Sign out
         </button>
       </div>
 
-      <h2 className="display mt-8 text-[2rem]">Pilots</h2>
-      <div className="mt-4 border-t border-hairline">
+      <h2 className="display mt-12 text-[1.6rem]">Pilots</h2>
+      <div className="mt-4 divide-y divide-line border-y border-line">
         {pilots.map((p) => (
-          <div key={p.id} className="flex justify-between gap-4 border-b border-hairline py-3">
+          <div key={p.id} className="flex justify-between gap-4 py-3 text-[0.9rem]">
             <span>{p.name}</span>
             <span className="text-smoke">
               {p.phone}
-              {p.region ? ` / ${p.region}` : ""}
+              {p.region ? ` · ${p.region}` : ""}
             </span>
           </div>
         ))}
       </div>
 
-      <h2 className="display mt-12 text-[2rem]">Pickups</h2>
+      <h2 className="display mt-12 text-[1.6rem]">Pickups</h2>
       {rows.length === 0 ? (
-        <div className="mt-4 border border-hairline p-5">
-          <p className="text-[0.9rem] leading-relaxed text-smoke">
+        <div className="card mt-4 p-6">
+          <p className="lede text-[0.9rem] text-smoke">
             Nothing readable on this account yet. If pickups have come in, this page needs
             your id unlocked. Send this to Genie:
           </p>
-          <code className="mt-4 block break-all border border-hairline p-3 text-[0.8rem]">
+          <code className="mt-4 block break-all rounded-xl bg-mist p-3 text-[0.8rem]">
             {user.id}
           </code>
         </div>
       ) : (
-        <div className="mt-4 border-t border-hairline">
+        <div className="mt-4 divide-y divide-line border-y border-line">
           {rows.map((r) => (
-            <div key={r.id} className="border-b border-hairline py-4">
-              <div className="flex justify-between gap-4">
-                <span className="label">
-                  {new Date(r.created_at).toLocaleString("en-US")}
-                </span>
-                <span className="text-[0.85rem] text-smoke">{r.phone}</span>
+            <div key={r.id} className="py-4">
+              <div className="flex justify-between gap-4 text-[0.75rem] text-quiet">
+                <span>{new Date(r.created_at).toLocaleString("en-US")}</span>
+                <span>{r.phone}</span>
               </div>
               <p className="mt-2 text-[0.95rem]">{r.prompt}</p>
-              <p className="label mt-2">to {r.dispatch_phone}</p>
+              <p className="mt-1 text-[0.75rem] text-quiet">to {r.dispatch_phone}</p>
             </div>
           ))}
         </div>
       )}
-      {error && <p className="mt-4 border-l border-paper pl-3 text-[0.85rem]">{error}</p>}
+      {error && <p className="mt-4 rounded-xl bg-mist px-4 py-3 text-[0.85rem]">{error}</p>}
     </div>
   );
 }

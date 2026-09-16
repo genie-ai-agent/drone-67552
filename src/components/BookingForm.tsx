@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Mic, Square, ArrowRight, Loader2 } from "lucide-react";
+import { Mic, Square, Check, Loader2 } from "lucide-react";
 import { SUBMIT_URL, getDispatcher, type Dispatcher } from "@/lib/db";
 
 type Status = "idle" | "sending" | "booked" | "error";
@@ -121,6 +121,7 @@ export default function BookingForm() {
   const phoneReady = digits(phone).length >= 10;
   const promptReady = prompt.trim().length >= 2;
   const canBook = phoneReady && promptReady && status !== "sending";
+  const d = dispatcher ?? FALLBACK;
 
   async function book(e: React.FormEvent) {
     e.preventDefault();
@@ -134,7 +135,7 @@ export default function BookingForm() {
       return;
     }
 
-    const to = (dispatcher ?? FALLBACK).phone;
+    const to = d.phone;
     const cleanPhone = prettyPhone(phone);
     const cleanPrompt = prompt.trim().slice(0, 1000);
     const link = smsHref(to, cleanPhone, cleanPrompt);
@@ -170,40 +171,39 @@ export default function BookingForm() {
   }
 
   if (status === "booked") {
-    const d = dispatcher ?? FALLBACK;
     return (
-      <section className="pt-8">
-        <p className="label">Booked</p>
-        <h2 className="display mt-3 text-[3rem] sm:text-[4.5rem]">On its way.</h2>
-        <div className="hairline mt-6"></div>
-        <dl className="mt-6 space-y-4 text-[0.95rem]">
-          <div className="flex justify-between gap-6">
-            <dt className="label">Your number</dt>
+      <div className="card rise p-6 sm:p-8">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-paper">
+          <Check size={20} strokeWidth={1.75} />
+        </div>
+        <h2 className="display mt-5 text-[2rem] sm:text-[2.4rem]">On its way.</h2>
+        <p className="lede mt-2 text-[0.9rem] text-smoke">
+          A text to {d.name} should have opened. If it didn't, tap below.
+        </p>
+
+        <dl className="mt-7 divide-y divide-line border-y border-line text-[0.9rem]">
+          <div className="flex justify-between gap-6 py-3">
+            <dt className="text-smoke">Your number</dt>
             <dd className="text-right">{prettyPhone(phone)}</dd>
           </div>
-          <div className="flex justify-between gap-6">
-            <dt className="label">Stuff</dt>
-            <dd className="max-w-[60%] text-right text-paper">{prompt.trim()}</dd>
+          <div className="flex justify-between gap-6 py-3">
+            <dt className="text-smoke">Stuff</dt>
+            <dd className="max-w-[62%] text-right">{prompt.trim()}</dd>
           </div>
-          <div className="flex justify-between gap-6">
-            <dt className="label">Dispatch</dt>
+          <div className="flex justify-between gap-6 py-3">
+            <dt className="text-smoke">Dispatch</dt>
             <dd className="text-right">
               {d.name} / {d.phone}
             </dd>
           </div>
         </dl>
-        <div className="hairline mt-6"></div>
-        <p className="mt-6 text-[0.85rem] leading-relaxed text-smoke">
-          Logged with dispatch. A text to {d.name} should have opened — if it didn't,
-          tap below.
-        </p>
-        <a href={lastLink} className="btn-book mt-5 no-underline">
-          <span>Open the text</span>
-          <ArrowRight className="arrow" size={22} strokeWidth={2.5} />
+
+        <a href={lastLink} className="pill pill-block mt-7">
+          Open the text
         </a>
         <button
           type="button"
-          className="label mt-6 underline underline-offset-4"
+          className="quiet-link mt-5 block"
           onClick={() => {
             setStatus("idle");
             setPrompt("");
@@ -212,99 +212,101 @@ export default function BookingForm() {
         >
           Book another
         </button>
-      </section>
+      </div>
     );
   }
 
-  const d = dispatcher ?? FALLBACK;
-
   return (
-    <form onSubmit={book} className="pt-8" noValidate>
-      <label className="label block" htmlFor="phone">
-        01 / Your number
-      </label>
-      <input
-        id="phone"
-        name="phone"
-        className="field mt-2"
-        inputMode="tel"
-        autoComplete="tel"
-        placeholder="215 000 0000"
-        value={phone}
-        onChange={(e) => setPhone(prettyPhone(e.target.value))}
-      />
-
-      <div className="mt-10 flex items-end justify-between gap-4">
-        <label className="label block" htmlFor="prompt">
-          02 / What's gone
-        </label>
-        <span className="label">{prompt.trim().length}/1000</span>
-      </div>
-
-      <div className="mt-2 flex items-start gap-4">
-        <textarea
-          id="prompt"
-          name="prompt"
-          className="field min-h-[92px] resize-none"
-          rows={3}
-          maxLength={1000}
-          placeholder={
-            speechOk ? "Hit the mic and say it. Or type." : "Type what you want gone."
-          }
-          value={listening && interim ? `${prompt} ${interim}`.trim() : prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        {speechOk && (
-          <button
-            type="button"
-            aria-label={listening ? "Stop recording" : "Record what you want gone"}
-            aria-pressed={listening}
-            onClick={listening ? stopListening : startListening}
-            className={`relative flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border transition-colors ${
-              listening
-                ? "border-paper bg-paper text-ink"
-                : "border-hairline bg-transparent text-paper hover:border-paper"
-            }`}
-          >
-            {listening && <span className="mic-ring"></span>}
-            {listening ? (
-              <Square size={18} strokeWidth={2.5} />
-            ) : (
-              <Mic size={20} strokeWidth={2} />
-            )}
-          </button>
-        )}
-      </div>
-
-      <p className="mt-3 h-5 text-[0.72rem] tracking-[0.14em] uppercase text-smoke">
-        {listening
-          ? "Listening… speak now"
-          : speechOk
-            ? "Voice or keyboard, your call"
-            : "No mic support in this browser — type it instead"}
+    <form onSubmit={book} className="card p-6 sm:p-8" noValidate>
+      <h2 className="display text-[1.5rem] sm:text-[1.75rem]">
+        What should<br />we take?
+      </h2>
+      <p className="lede mt-2 text-[0.875rem] text-smoke">
+        Two fields. No photos, no lists.
       </p>
 
-      {error && (
-        <p className="mt-3 border-l border-paper pl-3 text-[0.85rem] text-paper">
-          {error}
-        </p>
-      )}
-
-      <div className="mt-8">
-        <button type="submit" className="btn-book" disabled={!canBook}>
-          <span>{status === "sending" ? "Dispatching…" : "Book"}</span>
-          {status === "sending" ? (
-            <Loader2 className="animate-spin" size={22} strokeWidth={2.5} />
-          ) : (
-            <ArrowRight className="arrow" size={22} strokeWidth={2.5} />
-          )}
-        </button>
+      <div className="mt-7">
+        <label className="text-[0.8125rem] text-smoke" htmlFor="phone">
+          Your number
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          className="field mt-2"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder="215 000 0000"
+          value={phone}
+          onChange={(e) => setPhone(prettyPhone(e.target.value))}
+        />
       </div>
 
-      <p className="mt-4 text-[0.72rem] leading-relaxed tracking-[0.1em] uppercase text-smoke">
+      <div className="mt-5">
+        <div className="flex items-baseline justify-between gap-4">
+          <label className="text-[0.8125rem] text-smoke" htmlFor="prompt">
+            What's gone
+          </label>
+          <span className="text-[0.75rem] text-quiet">{prompt.trim().length}/1000</span>
+        </div>
+        <div className="mt-2 flex items-start gap-3">
+          <textarea
+            id="prompt"
+            name="prompt"
+            className="field min-h-[96px] resize-none leading-relaxed"
+            rows={3}
+            maxLength={1000}
+            placeholder={
+              speechOk ? "Tap the mic and say it. Or type." : "Type what you want gone."
+            }
+            value={listening && interim ? `${prompt} ${interim}`.trim() : prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          {speechOk && (
+            <button
+              type="button"
+              className="mic"
+              data-on={listening ? "true" : "false"}
+              aria-label={listening ? "Stop recording" : "Record what you want gone"}
+              aria-pressed={listening}
+              onClick={listening ? stopListening : startListening}
+            >
+              {listening && <span className="mic-ring"></span>}
+              {listening ? (
+                <Square size={16} strokeWidth={2} />
+              ) : (
+                <Mic size={19} strokeWidth={1.5} />
+              )}
+            </button>
+          )}
+        </div>
+        <p className="mt-2 h-4 text-[0.75rem] text-quiet">
+          {listening
+            ? "Listening… speak now"
+            : speechOk
+              ? "Voice or keyboard, your call."
+              : "No mic in this browser — type it instead."}
+        </p>
+      </div>
+
+      {error && (
+        <p className="mt-4 rounded-xl bg-mist px-4 py-3 text-[0.85rem] text-ink">{error}</p>
+      )}
+
+      <button type="submit" className="pill pill-block mt-6" disabled={!canBook}>
+        {status === "sending" ? (
+          <>
+            <Loader2 className="animate-spin" size={17} strokeWidth={2} />
+            Dispatching…
+          </>
+        ) : (
+          "Book"
+        )}
+      </button>
+
+      <p className="mt-3 text-center text-[0.75rem] text-quiet">
         {dispatchLoading
           ? "Finding a pilot…"
-          : `Routes to ${d.name} / ${d.phone}${d.region ? ` / ${d.region}` : ""}`}
+          : `Routes to ${d.name} · ${d.phone}${d.region ? ` · ${d.region}` : ""}`}
       </p>
     </form>
   );

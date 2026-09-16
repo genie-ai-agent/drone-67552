@@ -4,16 +4,18 @@ import Header from "@/components/Header.astro";
 import DispatchLog from "@/components/DispatchLog.tsx";
 ---
 
-<Layout title="Drone — Dispatch log">
-  <Header />
-  <main class="px-5 pb-20 sm:px-10">
-    <section class="pt-10">
-      <p class="label">Internal</p>
-      <h1 class="display mt-4 text-[16vw] sm:text-[6rem]">Dispatch.</h1>
-    </section>
-    <div class="max-w-[720px]">
+<Layout title="Drone — Dispatch">
+  <div class="border-b border-line">
+    <Header tone="dark" />
+  </div>
+  <main class="px-5 pb-24 sm:px-10">
+    <div class="mx-auto max-w-[720px]">
+      <section class="pt-12 sm:pt-16">
+        <p class="text-[0.8125rem] text-smoke">Internal</p>
+        <h1 class="display mt-3 text-[12vw] sm:text-[3.4rem]">Dispatch.</h1>
+      </section>
       <DispatchLog client:load />
+      <a class="quiet-link mt-12 inline-block" href="/">Back to site</a>
     </div>
-    <a class="label mt-12 inline-block underline underline-offset-4" href="/">Back</a>
   </main>
 </Layout>

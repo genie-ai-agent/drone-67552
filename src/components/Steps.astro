@@ -1,0 +1,38 @@
+---
+import { Mic, Send, Wind } from "lucide-react";
+
+const steps = [
+  {
+    icon: Mic,
+    t: "Say it",
+    d: "Hit the mic and name the thing.",
+  },
+  {
+    icon: Send,
+    t: "Book it",
+    d: "One tap. It lands with a pilot.",
+  },
+  {
+    icon: Wind,
+    t: "It's gone",
+    d: "We haul, donate or recycle.",
+  },
+];
+---
+
+<section class="border-y border-line bg-paper px-5 py-16 sm:px-10 sm:py-20">
+  <div class="mx-auto grid max-w-[1100px] gap-10 sm:grid-cols-3 sm:gap-8">
+    {
+      steps.map(({ icon: Icon, t, d }) => (
+        <div>
+          <Icon size={22} strokeWidth={1.25} />
+          <h3 class="mt-5 text-[1rem] font-normal tracking-[-0.02em]">{t}</h3>
+          <p class="lede mt-2 max-w-[26ch] text-[0.875rem] text-smoke">{d}</p>
+        </div>
+      ))
+    }
+  </div>
+  <p class="mx-auto mt-14 max-w-[1100px] text-[0.75rem] font-light text-quiet">
+    Same day where available. No photos, no lists.
+  </p>
+</section>

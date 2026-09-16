@@ -4,13 +4,15 @@ import Header from "@/components/Header.astro";
 import HeroCover from "@/components/HeroCover.astro";
 import BookingForm from "@/components/BookingForm.tsx";
 import Steps from "@/components/Steps.astro";
+import DroneSwarm from "@/components/DroneSwarm.astro";
 ---
 
 <Layout>
   <!-- hero -->
   <section class="relative isolate min-h-[92svh] bg-black text-white">
     <HeroCover />
-    <div class="relative flex min-h-[92svh] flex-col">
+    <DroneSwarm tone="light" />
+    <div class="relative z-10 flex min-h-[92svh] flex-col">
       <div class="mx-auto w-full max-w-[1180px]">
         <Header tone="light" />
       </div>
@@ -22,7 +24,12 @@ import Steps from "@/components/Steps.astro";
           <p class="lede rise mt-6 max-w-[34ch] text-[1rem] text-white/70 sm:text-[1.15rem]">
             Say what you want out of your life. A drone comes and takes it.
           </p>
-          <a href="#book" class="pill pill-light mt-9">Book a pickup</a>
+          <div class="rise mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href="#book" class="pill pill-light">Book a pickup</a>
+            <span class="flex items-center gap-2 text-[0.75rem] font-light tracking-[0.16em] text-white/60 uppercase">
+              <span class="blip"></span>ETA in NYC &middot; 30 min
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -38,8 +45,9 @@ import Steps from "@/components/Steps.astro";
   <Steps />
 
   <!-- closer -->
-  <section class="bg-mist px-5 py-20 sm:px-10 sm:py-28">
-    <div class="mx-auto max-w-[1100px]">
+  <section class="relative isolate overflow-hidden bg-mist px-5 py-20 sm:px-10 sm:py-28">
+    <DroneSwarm tone="dark" flock={[[14, 46, 42, 3, 2], [76, 38, 52, 22, 3]]} />
+    <div class="relative z-10 mx-auto max-w-[1100px]">
       <h2 class="display text-[12vw] sm:text-[3.4rem]">
         Anything.<br />Anywhere.
       </h2>

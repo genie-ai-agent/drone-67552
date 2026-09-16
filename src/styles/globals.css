@@ -254,11 +254,162 @@ body {
   animation: kenburns 14s ease-out both;
 }
 
+/* ---------- drone swarm ---------- */
+
+.swarm {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.swarm-light {
+  color: #ffffff;
+}
+
+.swarm-dark {
+  color: #000000;
+}
+
+.swarm-dark .craft {
+  opacity: 0.26;
+}
+
+.swarm-dark .eta {
+  opacity: 0.34;
+}
+
+.blip {
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-radius: 999px;
+  background: #ffffff;
+  animation: blip 2s ease-in-out infinite;
+}
+
+@keyframes blip {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.drone {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  animation: fly var(--dur, 38s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+
+.drone-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bob 3.4s ease-in-out infinite;
+}
+
+.craft {
+  width: var(--size, 56px);
+  height: auto;
+  opacity: 0.9;
+}
+
+.rotor {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rotor 0.16s linear infinite alternate;
+}
+
+.eta {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem 0.26rem;
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.72;
+}
+
+@keyframes rotor {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0.55);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(-5px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(1.5deg);
+  }
+}
+
+@keyframes fly {
+  0% {
+    transform: translate3d(-24vw, 0, 0);
+  }
+  50% {
+    transform: translate3d(45vw, -22px, 0);
+  }
+  100% {
+    transform: translate3d(118vw, 8px, 0);
+  }
+}
+
+.drone-p2 {
+  animation-direction: reverse;
+}
+
+.drone-p3 {
+  animation-name: fly-low;
+}
+
+@keyframes fly-low {
+  0% {
+    transform: translate3d(-20vw, 14px, 0);
+  }
+  40% {
+    transform: translate3d(34vw, -16px, 0);
+  }
+  100% {
+    transform: translate3d(116vw, 22px, 0);
+  }
+}
+
+@media (max-width: 700px) {
+  .eta {
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kenburns,
   .drift,
-  .rise {
+  .rise,
+  .drone,
+  .drone-inner,
+  .rotor {
     animation: none;
+  }
+
+  .drone {
+    transform: translate3d(12vw, 0, 0);
   }
 }
 

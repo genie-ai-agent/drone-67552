@@ -292,7 +292,16 @@ export default function BookingForm() {
         <p className="mt-4 rounded-xl bg-mist px-4 py-3 text-[0.85rem] text-ink">{error}</p>
       )}
 
-      <button type="submit" className="pill pill-block mt-6" disabled={!canBook}>
+      <div className="mt-6 rounded-2xl border border-line bg-mist px-4 py-4">
+        <p className="text-[0.8125rem] font-normal">Cheaper, because you're in the mission.</p>
+        <p className="lede mt-1.5 text-[0.8125rem] text-smoke">
+          Using Drone costs less than a hauler. Every pickup is captured on video, and
+          that footage feeds our data layer, teaching machines the work. You contribute
+          to ending human labor, so you pay less for it.
+        </p>
+      </div>
+
+      <button type="submit" className="pill pill-block mt-4" disabled={!canBook}>
         {status === "sending" ? (
           <>
             <Loader2 className="animate-spin" size={17} strokeWidth={2} />

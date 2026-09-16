@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink: #050505;
+  --color-paper: #fafaf8;
+  --color-smoke: #8f8f8c;
+  --color-ash: #262625;
+  --color-hairline: #2e2e2c;
+
+  --color-background: #050505;
+  --color-foreground: #fafaf8;
+  --color-border: #2e2e2c;
+  --color-input: #2e2e2c;
+  --color-ring: #fafaf8;
+  --color-muted: #131312;
+  --color-muted-foreground: #8f8f8c;
+  --color-primary: #fafaf8;
+  --color-primary-foreground: #050505;
+  --color-secondary: #131312;
+  --color-secondary-foreground: #fafaf8;
+  --color-accent: #131312;
+  --color-accent-foreground: #fafaf8;
+  --color-destructive: #fafaf8;
+  --color-card: #0b0b0a;
+  --color-card-foreground: #fafaf8;
+  --color-popover: #0b0b0a;
+  --color-popover-foreground: #fafaf8;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+:root {
+  --radius: 0px;
+}
+
+* {
+  border-color: var(--color-hairline);
+}
+
+html {
+  background: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* fine film grain over the whole thing, keeps pure black from looking flat */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: none;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+}
+
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--color-hairline);
+}
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-hairline);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 1.0625rem;
+  padding: 0.9rem 0;
+  outline: none;
+  transition: border-color 0.25s ease;
+  border-radius: 0;
+}
+
+.field::placeholder {
+  color: #575754;
+}
+
+.field:focus {
+  border-bottom-color: var(--color-paper);
+}
+
+.btn-book {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  border: 1px solid var(--color-paper);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-book:hover:not(:disabled) {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn-book:disabled {
+  background: transparent;
+  color: #575754;
+  border-color: var(--color-hairline);
+  cursor: not-allowed;
+}
+
+.btn-book .arrow {
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.btn-book:hover:not(:disabled) .arrow {
+  transform: translateX(8px);
+}
+
+@keyframes ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.mic-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-paper);
+  border-radius: 999px;
+  animation: ring 1.8s ease-out infinite;
+}
+
+@keyframes hover-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.drift {
+  animation: hover-drift 4.5s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}

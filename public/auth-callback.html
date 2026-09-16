@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Signing you in…</title>
+<body style="background:#050505;color:#fafaf8;font-family:monospace;padding:24px">
+  Signing you in…
+</body>
+<script type="module">
+  import { createClient } from "https://esm.sh/@neondatabase/neon-js@0.7.0-beta";
+
+  const db = createClient({
+    auth: {
+      url: "https://ep-rapid-queen-awjstrrs.neonauth.c-12.us-east-1.aws.neon.tech/neondb/auth",
+    },
+    dataApi: {
+      url: "https://ep-rapid-queen-awjstrrs.apirest.c-12.us-east-1.aws.neon.tech/neondb/rest/v1",
+    },
+  });
+
+  await db.auth.getSession();
+  window.opener?.postMessage("signed-in", window.location.origin);
+  window.close();
+</script>

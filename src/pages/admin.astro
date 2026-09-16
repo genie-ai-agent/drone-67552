@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import DispatchLog from "@/components/DispatchLog.tsx";
+---
+
+<Layout title="Drone — Dispatch log">
+  <Header />
+  <main class="px-5 pb-20 sm:px-10">
+    <section class="pt-10">
+      <p class="label">Internal</p>
+      <h1 class="display mt-4 text-[16vw] sm:text-[6rem]">Dispatch.</h1>
+    </section>
+    <div class="max-w-[720px]">
+      <DispatchLog client:load />
+    </div>
+    <a class="label mt-12 inline-block underline underline-offset-4" href="/">Back</a>
+  </main>
+</Layout>

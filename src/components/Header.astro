@@ -1,4 +1,6 @@
 ---
+import DeleteAccount from "@/components/DeleteAccount.tsx";
+
 interface Props {
   tone?: "light" | "dark";
 }
@@ -7,14 +9,17 @@ const text = tone === "light" ? "text-white" : "text-black";
 const muted = tone === "light" ? "text-white/60" : "text-smoke";
 ---
 
-<header class={`flex items-center justify-between px-5 py-6 sm:px-10 ${text}`}>
+<header class={`flex items-center justify-between gap-3 px-5 py-6 sm:px-10 ${text}`}>
   <a href="/" class={`wordmark text-[1.55rem] no-underline sm:text-[1.85rem] ${text}`}>
     Drone
   </a>
-  <a
-    href="#book"
-    class={`text-[0.8125rem] font-light tracking-[0.02em] no-underline transition-opacity hover:opacity-70 ${muted}`}
-  >
-    Book a pickup
-  </a>
+  <div class="flex items-center gap-4 sm:gap-6">
+    <a
+      href="#book"
+      class={`hidden text-[0.8125rem] font-light tracking-[0.02em] no-underline transition-opacity hover:opacity-70 sm:inline ${muted}`}
+    >
+      Book a pickup
+    </a>
+    <DeleteAccount tone={tone} client:load />
+  </div>
 </header>

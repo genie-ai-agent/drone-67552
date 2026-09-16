@@ -13,6 +13,9 @@ export const db = createClient({
 export const SUBMIT_URL =
   "https://api.genie.jellyjelly.com/forms/z6-Rr0Wkcl5awYqqIbkFG8ft-jcwlNl6";
 
+export const DELETE_URL =
+  "https://api.genie.jellyjelly.com/forms/0aLis-OzeaztHR2glW77UaOsX_PZwuVL";
+
 export type Dispatcher = {
   id: number;
   name: string;

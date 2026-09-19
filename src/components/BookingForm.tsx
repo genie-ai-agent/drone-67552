@@ -127,7 +127,7 @@ export default function BookingForm() {
     e.preventDefault();
     if (listening) stopListening();
     if (!phoneReady) {
-      setError("Need a full 10-digit number so the pilot can reach you.");
+      setError("Need a full 10-digit number so dispatch can reach you.");
       return;
     }
     if (!promptReady) {
@@ -222,7 +222,7 @@ export default function BookingForm() {
         What should<br />we take?
       </h2>
       <p className="lede mt-2 text-[0.875rem] text-smoke">
-        Two fields. No photos, no lists.
+Two fields. Say the trash, it leaves.
       </p>
 
       <div className="mt-7">
@@ -296,8 +296,9 @@ export default function BookingForm() {
         <p className="text-[0.8125rem] font-normal">Cheaper, because you're in the mission.</p>
         <p className="lede mt-1.5 text-[0.8125rem] text-smoke">
           Using Drone costs less than a hauler. Every pickup is captured on video, and
-          that footage feeds our data layer, teaching machines the work. You contribute
-          to ending human labor, so you pay less for it.
+          that footage feeds our data layer, teaching machines the work. Our mission is
+          to clean all trash without human labor, and you're funding it, so you pay less
+          for it.
         </p>
       </div>
 
@@ -314,7 +315,7 @@ export default function BookingForm() {
 
       <p className="mt-3 text-center text-[0.75rem] text-quiet">
         {dispatchLoading
-          ? "Finding a pilot…"
+          ? "Finding dispatch…"
           : `Routes to ${d.name} · ${d.phone}${d.region ? ` · ${d.region}` : ""}`}
       </p>
     </form>

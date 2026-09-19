@@ -1,0 +1,35 @@
+---
+// The mission statement, set as the loudest sentence on the site.
+import DroneSwarm from "@/components/DroneSwarm.astro";
+---
+
+<section
+  id="mission"
+  class="relative isolate overflow-hidden bg-ink px-5 py-20 text-white sm:px-10 sm:py-28"
+>
+  <DroneSwarm tone="light" flock={[[18, 34, 46, 0, 2], [72, 62, 38, 16, 3]]} />
+
+  <div class="relative z-10 mx-auto max-w-[1100px]">
+    <p class="eyebrow text-white/45">The mission</p>
+
+    <h2 class="display mt-7 text-[8.6vw] leading-[1.04] sm:text-[3.8rem] sm:leading-[0.98] lg:text-[4.75rem]">
+      Our mission is to clean<br class="hidden sm:block" /> all trash
+      <span class="text-white/55">without human labor.</span>
+    </h2>
+
+    <div class="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 sm:gap-14">
+      <p class="lede max-w-[40ch] text-[1rem] text-white/70 sm:text-[1.1rem]">
+        Every bag, every couch, every pile left on a curb. In every city, on every
+        continent. Nobody should have to carry the world's garbage by hand, and the
+        machines are ready to stop asking them to.
+      </p>
+      <p class="lede max-w-[40ch] text-[1rem] text-white/70 sm:text-[1.1rem]">
+        You say what you want gone. A drone comes for it, a fleet sorts it, and the
+        video of the job teaches the next one. No crew to schedule, nobody to flake,
+        no truck idling at the curb.
+      </p>
+    </div>
+
+    <a href="#book" class="pill pill-light mt-11">Put something in the queue</a>
+  </div>
+</section>

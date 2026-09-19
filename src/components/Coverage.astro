@@ -1,0 +1,53 @@
+---
+// Worldwide rollout. New York is live; the rest are queued, and labelled that way.
+const cities = [
+  { c: "New York", s: "Live", e: "30 min" },
+  { c: "Philadelphia", s: "Queued", e: null },
+  { c: "Los Angeles", s: "Queued", e: null },
+  { c: "Mexico City", s: "Queued", e: null },
+  { c: "London", s: "Queued", e: null },
+  { c: "Lagos", s: "Queued", e: null },
+  { c: "Mumbai", s: "Queued", e: null },
+  { c: "Jakarta", s: "Queued", e: null },
+  { c: "S\u00e3o Paulo", s: "Queued", e: null },
+  { c: "Tokyo", s: "Queued", e: null },
+];
+---
+
+<section id="cities" class="bg-mist px-5 py-16 sm:px-10 sm:py-24">
+  <div class="mx-auto grid max-w-[1100px] gap-12 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
+    <div>
+      <p class="eyebrow">The rollout</p>
+      <h2 class="display mt-6 text-[11vw] sm:text-[3.1rem]">
+        Autonomous,<br />worldwide.
+      </h2>
+      <p class="lede mt-6 max-w-[34ch] text-[0.95rem] text-smoke sm:text-[1.05rem]">
+        One fleet, one prompt, any city. We open in the order the trash demands, not the
+        order the money does, so the places with the least collection come first.
+      </p>
+    </div>
+
+    <ul class="divide-y divide-line border-y border-line">
+      {
+        cities.map(({ c, s, e }) => (
+          <li class="flex items-baseline justify-between gap-6 py-4">
+            <span class="text-[1.05rem] font-light tracking-[-0.02em]">{c}</span>
+            <span class="flex items-center gap-3">
+              {e && <span class="text-[0.8125rem] text-smoke">ETA {e}</span>}
+              <span
+                class={
+                  s === "Live"
+                    ? "flex items-center gap-2 text-[0.6875rem] font-normal tracking-[0.18em] text-ink uppercase"
+                    : "text-[0.6875rem] font-normal tracking-[0.18em] text-quiet uppercase"
+                }
+              >
+                {s === "Live" && <span class="blip !bg-black" />}
+                {s}
+              </span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

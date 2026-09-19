@@ -1,0 +1,56 @@
+---
+// The size of the job, in real numbers. Waste figures: World Bank, What a Waste 3.0.
+const stats = [
+  {
+    n: "2.56B",
+    u: "tonnes",
+    d: "Municipal solid waste the world produced in 2022, on track for 3.86 billion tonnes by 2050.",
+  },
+  {
+    n: "18M",
+    u: "people",
+    d: "Urban waste workers doing this by hand today, collecting, sorting and hauling it.",
+  },
+  {
+    n: "31%",
+    u: "collected",
+    d: "Collection rates fall this low in Sub-Saharan Africa. Most of the rest is openly dumped.",
+  },
+  {
+    n: "0",
+    u: "humans",
+    d: "What the job should cost in human labor. That number is the whole company.",
+  },
+];
+---
+
+<section class="border-b border-line bg-paper px-5 py-16 sm:px-10 sm:py-24">
+  <div class="mx-auto max-w-[1100px]">
+    <p class="eyebrow">The size of it</p>
+    <h2 class="display mt-6 max-w-[22ch] text-[10vw] sm:text-[3.1rem]">
+      Trash is the last<br />manual industry.
+    </h2>
+
+    <div class="mt-12 grid gap-px border-t border-line sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map(({ n, u, d }) => (
+          <div class="border-b border-line pt-7 pb-8 lg:border-r lg:pr-7 lg:last:border-r-0">
+            <p class="display text-[2.85rem] sm:text-[3.15rem]">{n}</p>
+            <p class="eyebrow mt-2">{u}</p>
+            <p class="lede mt-4 max-w-[30ch] text-[0.875rem] text-smoke">{d}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-9 text-[0.75rem] font-light text-quiet">
+      Waste figures: World Bank,
+      <a
+        class="underline decoration-line underline-offset-4 hover:decoration-ink"
+        href="https://www.worldbank.org/en/publication/what-a-waste"
+        target="_blank"
+        rel="noopener">What a Waste 3.0</a
+      >.
+    </p>
+  </div>
+</section>

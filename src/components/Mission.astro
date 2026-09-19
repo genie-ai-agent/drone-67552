@@ -7,7 +7,11 @@ import DroneSwarm from "@/components/DroneSwarm.astro";
   id="mission"
   class="relative isolate overflow-hidden bg-ink px-5 py-20 text-white sm:px-10 sm:py-28"
 >
-  <DroneSwarm tone="light" flock={[[18, 34, 46, 0, 2], [72, 62, 38, 16, 3]]} />
+  <DroneSwarm
+    tone="light"
+    labels={false}
+    flock={[[12, 34, 46, 0, 2], [78, 58, 38, 16, 3]]}
+  />
 
   <div class="relative z-10 mx-auto max-w-[1100px]">
     <p class="eyebrow text-white/45">The mission</p>

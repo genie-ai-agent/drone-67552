@@ -3,11 +3,13 @@
 // Pure CSS motion, zero client JS. Clipped to the section so nothing scrolls.
 interface Props {
   tone?: "light" | "dark";
+  /** draw the ETA tag behind each craft (off over body copy) */
+  labels?: boolean;
   /** drones to draw: [top %, size px, seconds, delay s, path] */
   flock?: Array<[number, number, number, number, 1 | 2 | 3]>;
 }
 
-const { tone = "light", flock = [] } = Astro.props as Props;
+const { tone = "light", labels = true, flock = [] } = Astro.props as Props;
 
 const craft: Array<[number, number, number, number, 1 | 2 | 3]> =
   flock.length > 0
@@ -46,7 +48,7 @@ const craft: Array<[number, number, number, number, 1 | 2 | 3]> =
               <path d="M33 33.4v2.2" />
             </g>
           </svg>
-          <span class="eta">ETA in NYC &middot; 30 min</span>
+          {labels && <span class="eta">ETA in NYC &middot; 30 min</span>}
         </div>
       </div>
     ))
